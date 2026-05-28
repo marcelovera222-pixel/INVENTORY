@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: mr-lukas-inventory
+    runtime: docker
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /api/locations
+    disk:
+      name: inventory-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: INVENTORY_HOST
+        value: 0.0.0.0
+      - key: INVENTORY_PORT
+        value: 10000
+      - key: INVENTORY_DATA_DIR
+        value: /var/data
+      - key: INVENTORY_STAFF_CODE
+        sync: false
+      - key: INVENTORY_SESSION_SECRET
+        generateValue: true
+      - key: INVENTORY_SESSION_HOURS
+        value: 12
